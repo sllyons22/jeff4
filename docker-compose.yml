@@ -1,0 +1,19 @@
+version: "3"
+services:
+  node-thing:
+    image: jeffrygonzalez/node-api-on-call:2
+    ports:
+      - 8080:3000
+  api:
+    image: jeffrygonzalez/employeesapi:sep21
+    ports: 
+      - 80:80
+    environment: 
+      - nodeApi=http://node-thing:8080
+      - ConnectionStrings__employees=server=sql;database=employees_docker;user=sa;password=TokyoJoe138!
+  sql:
+    image: jeffrygonzalez/sqlfor-employees:sep21
+    ports:
+      - 1433:1433
+    
+      
